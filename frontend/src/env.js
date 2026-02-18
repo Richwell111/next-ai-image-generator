@@ -13,13 +13,13 @@ export const env = createEnv({
       .default("development"),
     BETTER_AUTH_SECRET: z.string(),
     BETTER_AUTH_URL: z.string().url(),
-     POLAR_ACCESS_TOKEN: z.string(),
+    POLAR_ACCESS_TOKEN: z.string(),
     POLAR_WEBHOOK_SECRET: z.string(),
     AWS_ACCESS_KEY_ID: z.string(),
     AWS_SECRET_ACCESS_KEY: z.string(),
     AWS_REGION: z.string(),
     AWS_S3_BUCKET_NAME: z.string(),
-    MODAL_Z_IMAGE_URL: z.string(),    
+    MODAL_ZIMAGE_URL: z.string(),
   },
 
   /**
@@ -46,8 +46,7 @@ export const env = createEnv({
     AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
     AWS_REGION: process.env.AWS_REGION,
     AWS_S3_BUCKET_NAME: process.env.AWS_S3_BUCKET_NAME,
-    MODAL_Z_IMAGE_URL: process.env.MODAL_Z_IMAGE_URL,
-    
+    MODAL_ZIMAGE_URL: process.env.MODAL_ZIMAGE_URL,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**
