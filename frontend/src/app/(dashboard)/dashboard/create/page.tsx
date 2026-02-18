@@ -10,10 +10,11 @@ import {
   getUserImageProjects,
 } from "~/actions/text-to-image";
 import { toast } from "sonner";
-
-import ImageSettings from "~/components/image-settings";
 import PromptInput from "~/components/prompt-input";
+import ImageSettings from "~/components/image-settings";
 import ImageHistory from "~/components/image-history";
+
+
 
 export interface GeneratedImage {
   s3_key: string;
