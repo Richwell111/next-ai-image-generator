@@ -5,10 +5,21 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@prisma/client";
 
 
-const connectionString = `${process.env.DATABASE_URL}`;
+import { Pool } from "pg";
 
- 
-const adapter = new PrismaPg({ connectionString });
+const connectionString = `${process.env.DATABASE_URL}`;
+const connectionUrl = new URL(connectionString);
+// Remove sslmode query param as it conflicts with the ssl option in PoolConfig
+connectionUrl.searchParams.delete("sslmode");
+
+const pool = new Pool({
+  connectionString: connectionUrl.toString(),
+  max: 1,
+  ssl: connectionString.includes("localhost")
+    ? false
+    : { rejectUnauthorized: false },
+});
+const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 export { prisma };

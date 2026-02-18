@@ -2,12 +2,25 @@
 
 import { UserButton } from "@daveyplate/better-auth-ui";
 import { User, Settings } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function UserButtonWrapper() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return (
+      <div className="h-10 w-full animate-pulse rounded-md border border-neutral-200 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-800" />
+    );
+  }
+
   return (
     <UserButton
       variant="outline"
-      className="border-muted-foreground/20 hover:border-primary/50 w-full transition-colors"
+      className="w-full border-muted-foreground/20 transition-colors hover:border-primary/50"
       disableDefaultLinks={true}
       additionalLinks={[
         {

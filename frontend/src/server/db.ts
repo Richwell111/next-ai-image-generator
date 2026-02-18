@@ -5,14 +5,23 @@ import { PrismaClient } from "@prisma/client";
 import { env } from "~/env";
 
 const createPrismaClient = () => {
-  const connectionString = env.DATABASE_URL;
-  const pool = new Pool({ connectionString });
+  const connectionUrl = new URL(env.DATABASE_URL);
+  // Remove sslmode query param as it conflicts with the ssl option in PoolConfig
+  connectionUrl.searchParams.delete("sslmode");
+
+  const pool = new Pool({
+    connectionString: connectionUrl.toString(),
+    max: 1, // Only use 1 connection and let Prisma handle the concurrency
+    ssl: env.DATABASE_URL.includes("localhost")
+      ? false // No SSL for local dev
+      : { rejectUnauthorized: false }, // For Hosted DBs (Neon/Supabase) without strict verification
+  });
   const adapter = new PrismaPg(pool);
   
   return new PrismaClient({
     adapter,
     log:
-      env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
+      env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
   });
 };
 

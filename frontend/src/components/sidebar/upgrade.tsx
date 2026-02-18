@@ -7,14 +7,14 @@ import { Crown, Sparkles } from "lucide-react";
 export default function Upgrade() {
   const upgrade = async () => {
     // TODO: Enable this when billing plugin is configured
-    // await authClient.checkout({
-    //   products: [
-    //     "6c84189e-1ce2-4214-ac43-b439bb1e544e",
-    //     "038b2068-adb4-4d8b-803c-640462f71ed4",
-    //     "dd2f6988-aa65-476f-abec-f25c2ba0c58b",
-    //   ],
-    // });
-    console.log("Upgrade clicked");
+    await authClient.checkout({
+        
+      products: [
+        "1abe9287-6989-4203-a36d-0ac1b62caa50",
+        "8b80fb8a-9ce8-4f1f-a17a-6c187e2f0571",
+        "e63b831e-76a9-4a65-9aae-ce415b2961cc",
+      ],
+    });
   };
 
   return (
